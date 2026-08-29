@@ -4,6 +4,9 @@ on: [push]
 jobs:
   BuildAndPushContainer:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: CheckOut
         uses: actions/checkout@v5
@@ -32,3 +35,12 @@ jobs:
           docker tag ci_mc_server pavelkracmar122/pavel-mc-server-vanilla:$VERSION
           docker push pavelkracmar122/pavel-mc-server-vanilla:$VERSION
           docker push pavelkracmar122/pavel-mc-server-vanilla:latest
+
+      - name: Push to GitHub Container Registry
+        run: |
+          VERSION=$(cat VERSION)
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          docker tag ci_mc_server ghcr.io/${{ github.repository_owner }}/minecraft-server-vanilla:latest
+          docker tag ci_mc_server ghcr.io/${{ github.repository_owner }}/minecraft-server-vanilla:$VERSION
+          docker push ghcr.io/${{ github.repository_owner }}/minecraft-server-vanilla:$VERSION
+          docker push ghcr.io/${{ github.repository_owner }}/minecraft-server-vanilla:latest
