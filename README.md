@@ -24,4 +24,4 @@ docker compose up -d
 
 ## Server data
 
-The world and `server.properties` are stored in `/minecraft/konfigurace` inside the container — in `docker-compose.yml` it's mounted to `./data` so it survives container restarts.
+The world and `server.properties` are stored in `/minecraft/game-conf` inside the container — in `docker-compose.yml` it's mounted to `./data` so it survives container restarts.
