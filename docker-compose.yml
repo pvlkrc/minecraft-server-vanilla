@@ -1,5 +1,5 @@
 services:
-  muj-server:
+  minecraft-server:
     image: pavelkracmar122/pavel-mc-server-vanilla:latest
     container_name: minecraft-server-vanilla
     restart: unless-stopped
