@@ -22,6 +22,8 @@ docker compose up -d
 |---|---|
 | `EULA` | Must be `true`, otherwise the server refuses to start (agreement to the Mojang EULA) |
 
+Do not change SERVER PORT in server.properties directly, change server port in docker-compose.yml / left part of mapping "25565:25565".
+
 ## Server data
 
 The world and `server.properties` are stored in `/minecraft/game-conf` inside the container — in `docker-compose.yml` it's mounted to `./data` so it survives container restarts.
