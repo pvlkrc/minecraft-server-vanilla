@@ -2,7 +2,7 @@
 
 Docker image with a vanilla Minecraft server.
 
-Docker Hub: https://hub.docker.com/r/pavelkracmar122/pavel-mc-server-vanilla
+GitHub Container Repo: [ghcr.io/pvlkrc/minecraft-server-vanilla:latest](https://github.com/pvlkrc/minecraft-server-vanilla/pkgs/container/minecraft-server-vanilla)
 
 ## Run it
 

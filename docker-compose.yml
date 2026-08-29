@@ -1,6 +1,6 @@
 services:
   minecraft-server:
-    image: pavelkracmar122/pavel-mc-server-vanilla:latest
+    image: ghcr.io/pvlkrc/minecraft-server-vanilla:latest
     container_name: minecraft-server-vanilla
     restart: unless-stopped
     ports:
