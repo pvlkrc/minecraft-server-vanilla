@@ -1,0 +1,34 @@
+name: Deploy minecraft server docker
+on: [push]
+
+jobs:
+  BuildAndPushContainer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: CheckOut
+        uses: actions/checkout@v4
+        
+      - name: Dockerfile
+        run: |
+          docker build -t ci_mc_server .
+
+      - name: Docker run
+        run: |
+          docker run -d --name mc-server -e EULA=true --rm ci_mc_server
+
+      - name: Wait for server to start
+        run: |
+          i=1
+          while [ $i -ne 12 ]; do \
+          if docker logs mc-server 2>&1 | grep -q ": Done"; then break; else sleep 5; i=$(($i + 1)); fi; done
+          docker rm -f mc-server
+          if [ $i = 12 ]; then exit 1; fi;
+
+      - name: Push to Docker HUB Registry
+        run: |
+          VERSION=$(cat VERSION)
+          echo "${{ secrets.HUB_TOKEN }}" | docker login -u pavelkracmar122 --password-stdin
+          docker tag ci_mc_server pavelkracmar122/pavel-mc-server-vanilla:latest
+          docker tag ci_mc_server pavelkracmar122/pavel-mc-server-vanilla:$VERSION
+          docker push pavelkracmar122/pavel-mc-server-vanilla:$VERSION
+          docker push pavelkracmar122/pavel-mc-server-vanilla:latest
