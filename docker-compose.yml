@@ -8,4 +8,4 @@ services:
     environment:
       - EULA=true
     volumes:
-      - ./data:/minecraft/konfigurace
+      - ./data:/minecraft/game-conf
