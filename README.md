@@ -7,7 +7,7 @@ GitHub Container Repo: [ghcr.io/pvlkrc/minecraft-server-vanilla:latest](https://
 ## Run it
 
 ```
-docker run -d --name mc-server -e EULA=true -p 25565:25565 pavelkracmar122/pavel-mc-server-vanilla:latest
+docker run -d --name mc-server -e EULA=true -p 25565:25565 ghcr.io/pvlkrc/minecraft-server-vanilla:latest
 ```
 
 ## Or with docker-compose
